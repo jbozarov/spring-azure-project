@@ -18,8 +18,8 @@ steps:
       testResultsFiles: '**/TEST-*.xml'
       goals: 'verify'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifact: 'apiDemo-0.0.1-SNAPSHOT.jar'
-    publishLocation: 'pipeline'
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Pipeline.Workspace)'
+      artifact: 'apiDemo-0.0.1-SNAPSHOT.jar'
+      publishLocation: 'pipeline'
