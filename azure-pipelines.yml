@@ -12,7 +12,7 @@ steps:
       mavenPomFile: 'pom.xml'
       mavenOptions: '-Xmx3072m'
       javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '11'
+      jdkVersionOption: '1.11'
       jdkArchitectureOption: 'x64'
       publishJUnitResults: true
       testResultsFiles: '**/TEST-*.xml'
@@ -24,3 +24,9 @@ steps:
       targetPath: '$(Pipeline.Workspace)'
       artifact: 'apiDemo-0.0.1-SNAPSHOT.jar'
       publishLocation: 'pipeline'
+
+  - task: Maven@3
+    displayName: Unit Tests
+    inputs:
+      goal: "test"
+      mavenPomFile: "pom.xml"
