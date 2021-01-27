@@ -40,14 +40,14 @@ steps:
       goals: 'verify'
 
   - task: Maven@3
-      displayName: Verify coverage
-      inputs:
-        goals: "verify"
-        mavenPomFile: "pom.xml"
-        options: '-Pcoverage'
-        mavenOptions: "-Xmx3072m"
-        javaHomeOption: "JDKVersion"
-        jdkVersionOption: "1.11"
+    displayName: Verify coverage
+    inputs:
+      goals: "verify"
+      mavenPomFile: "pom.xml"
+      options: '-Pcoverage'
+      mavenOptions: "-Xmx3072m"
+      javaHomeOption: "JDKVersion"
+      jdkVersionOption: "1.11"
 
 
 
