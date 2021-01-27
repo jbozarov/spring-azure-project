@@ -23,7 +23,10 @@ steps:
     inputs:
       goals: 'test'
       mavenPomFile: 'pom.xml'
-
+      mavenOptions: "-Xmx3072m"
+      javaHomeOption: "JDKVersion"
+      jdkVersionOption: "1.11"
+      jdkArchitectureOption: "x64"
 
 
 
