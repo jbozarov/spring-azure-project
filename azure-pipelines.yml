@@ -6,27 +6,27 @@
 pool:
   vmImage: 'Ubuntu 16.04'
 
-steps:
-  - task: Maven@3
-    inputs:
-      mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
-      jdkArchitectureOption: 'x64'
-      publishJUnitResults: true
-      testResultsFiles: '**/TEST-*.xml'
-      goals: 'verify'
-
-
-  - task: PublishPipelineArtifact@1
-    inputs:
-      targetPath: '$(Pipeline.Workspace)'
-      artifact: 'apiDemo-0.0.1-SNAPSHOT.jar'
-      publishLocation: 'pipeline'
-
-  - task: Maven@3
-    displayName: Unit Tests
-    inputs:
-      goal: "test"
-      mavenPomFile: "pom.xml"
+#steps:
+#  - task: Maven@3
+#    inputs:
+#      mavenPomFile: 'pom.xml'
+#      mavenOptions: '-Xmx3072m'
+#      javaHomeOption: 'JDKVersion'
+#      jdkVersionOption: '1.11'
+#      jdkArchitectureOption: 'x64'
+#      publishJUnitResults: true
+#      testResultsFiles: '**/TEST-*.xml'
+#      goals: 'verify'
+#
+#
+#  - task: PublishPipelineArtifact@1
+#    inputs:
+#      targetPath: '$(Pipeline.Workspace)'
+#      artifact: 'apiDemo-0.0.1-SNAPSHOT.jar'
+#      publishLocation: 'pipeline'
+#
+#  - task: Maven@3
+#    displayName: Unit Tests
+#    inputs:
+#      goal: "test"
+#      mavenPomFile: "pom.xml"
