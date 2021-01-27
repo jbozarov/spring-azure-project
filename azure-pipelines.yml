@@ -8,15 +8,14 @@ pool:
 
 steps:
   - task: Maven@3
+    displayName: Maven Clean
     inputs:
+      goals: 'clean'
       mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
-      jdkArchitectureOption: 'x64'
-      publishJUnitResults: true
-      testResultsFiles: '**/TEST-*.xml'
-      goals: 'verify'
+      mavenOptions: "-Xmx3072m"
+      javaHomeOption: "JDKVersion"
+      jdkVersionOption: "1.11"
+      jdkArchitectureOption: "x64"
 
   - task: Maven@3
     displayName: Unit Tests
@@ -29,14 +28,17 @@ steps:
       jdkArchitectureOption: "x64"
 
   - task: Maven@3
-    displayName: Maven Clean
+    displayName: 'Maven Verify/'
     inputs:
-      goals: 'clean'
       mavenPomFile: 'pom.xml'
-      mavenOptions: "-Xmx3072m"
-      javaHomeOption: "JDKVersion"
-      jdkVersionOption: "1.11"
-      jdkArchitectureOption: "x64"
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/TEST-*.xml'
+      goals: 'verify'
+
 
 
 
