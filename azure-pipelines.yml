@@ -28,7 +28,7 @@ steps:
       jdkArchitectureOption: "x64"
 
   - task: Maven@3
-    displayName: 'Maven Verify/'
+    displayName: 'Maven Verify'
     inputs:
       mavenPomFile: 'pom.xml'
       mavenOptions: '-Xmx3072m'
@@ -39,6 +39,15 @@ steps:
       testResultsFiles: '**/TEST-*.xml'
       goals: 'verify'
 
+  - task: Maven@3
+      displayName: Verify coverage
+      inputs:
+        goals: "verify"
+        mavenPomFile: "pom.xml"
+        options: '-Pcoverage'
+        mavenOptions: "-Xmx3072m"
+        javaHomeOption: "JDKVersion"
+        jdkVersionOption: "1.11"
 
 
 
