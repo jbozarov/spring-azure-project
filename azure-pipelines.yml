@@ -77,8 +77,14 @@ stages:
              mavenOptions: "-Xmx3072m"
              javaHomeOption: "JDKVersion"
              jdkVersionOption: "1.11"
-             jdkArchitectureOption: "x64"
+             jdkArchitectureOption: "x64",
 
+  - stage: deploy_stage
+    displayName: "Deploy the app"
+    jobs:
+      - job: JavaDeploy
+        steps:
+          - task: nothing
 
 
 
