@@ -3,51 +3,60 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
+trigger:
+  - master
+  - feature/test
+
 pool:
   vmImage: 'Ubuntu 16.04'
 
-steps:
-  - task: Maven@3
-    displayName: Maven Clean
-    inputs:
-      goals: 'clean'
-      mavenPomFile: 'pom.xml'
-      mavenOptions: "-Xmx3072m"
-      javaHomeOption: "JDKVersion"
-      jdkVersionOption: "1.11"
-      jdkArchitectureOption: "x64"
+stages:
+  - stage: build_stage
+    displayName: "Build the app"
+    jobs:
+      - job: JavaBuild
+        steps:
+         - task: Maven@3
+           displayName: Maven Clean
+           inputs:
+             goals: 'clean'
+             mavenPomFile: 'pom.xml'
+             mavenOptions: "-Xmx3072m"
+             javaHomeOption: "JDKVersion"
+             jdkVersionOption: "1.11"
+             jdkArchitectureOption: "x64"
 
-  - task: Maven@3
-    displayName: Unit Tests
-    inputs:
-      goals: 'test'
-      mavenPomFile: 'pom.xml'
-      mavenOptions: "-Xmx3072m"
-      javaHomeOption: "JDKVersion"
-      jdkVersionOption: "1.11"
-      jdkArchitectureOption: "x64"
+         - task: Maven@3
+           displayName: Unit Tests
+           inputs:
+             goals: 'test'
+             mavenPomFile: 'pom.xml'
+             mavenOptions: "-Xmx3072m"
+             javaHomeOption: "JDKVersion"
+             jdkVersionOption: "1.11"
+             jdkArchitectureOption: "x64"
 
-  - task: Maven@3
-    displayName: 'Maven Verify'
-    inputs:
-      mavenPomFile: 'pom.xml'
-      mavenOptions: '-Xmx3072m'
-      javaHomeOption: 'JDKVersion'
-      jdkVersionOption: '1.11'
-      jdkArchitectureOption: 'x64'
-      publishJUnitResults: true
-      testResultsFiles: '**/TEST-*.xml'
-      goals: 'verify'
+         - task: Maven@3
+           displayName: 'Maven Verify'
+           inputs:
+             mavenPomFile: 'pom.xml'
+             mavenOptions: '-Xmx3072m'
+             javaHomeOption: 'JDKVersion'
+             jdkVersionOption: '1.11'
+             jdkArchitectureOption: 'x64'
+             publishJUnitResults: true
+             testResultsFiles: '**/TEST-*.xml'
+             goals: 'verify'
 
-  - task: Maven@3
-    displayName: Verify coverage
-    inputs:
-      goals: "verify"
-      mavenPomFile: "pom.xml"
-      options: '-Pcoverage'
-      mavenOptions: "-Xmx3072m"
-      javaHomeOption: "JDKVersion"
-      jdkVersionOption: "1.11"
+         - task: Maven@3
+           displayName: Verify coverage
+           inputs:
+             goals: "verify"
+             mavenPomFile: "pom.xml"
+             options: '-Pcoverage'
+             mavenOptions: "-Xmx3072m"
+             javaHomeOption: "JDKVersion"
+             jdkVersionOption: "1.11"
 
 
 
