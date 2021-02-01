@@ -79,12 +79,23 @@ stages:
              jdkVersionOption: "1.11"
              jdkArchitectureOption: "x64",
 
-  - stage: deploy_stage
-    displayName: "Deploy the app"
-    jobs:
-      - job: JavaDeploy
-        steps:
-          - task: nothing
+      - deployment: deployWebToDev
+        dependsOn: JavaBuild
+        displayName: deploy web app
+        pool:
+          name: "spring-jpa-aws"
+        environment: spring-jpa-dev"
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo Hello World
+                - task: AWSShellScript@1
+                  inputs:
+                    awsCredentials: 'my-aws-credentials'
+                    regionName: 'us-east-1'
+                    scriptType: 'inline'
+                    inlineScript: |
 
 
 
