@@ -27,6 +27,16 @@ stages:
              jdkArchitectureOption: "x64"
 
          - task: Maven@3
+           displayName: Maven Compile
+           inputs:
+             goals: "compile"
+             mavenPomFile: 'pom.xml'
+             mavenOptions: "-Xmx3072m"
+             javaHomeOption: "JDKVersion"
+             jdkVersionOption: "1.11"
+             jdkArchitectureOption: "x64"
+
+         - task: Maven@3
            displayName: Unit Tests
            inputs:
              goals: 'test'
@@ -39,6 +49,7 @@ stages:
          - task: Maven@3
            displayName: 'Maven Verify'
            inputs:
+             goals: 'verify'
              mavenPomFile: 'pom.xml'
              mavenOptions: '-Xmx3072m'
              javaHomeOption: 'JDKVersion'
@@ -46,7 +57,6 @@ stages:
              jdkArchitectureOption: 'x64'
              publishJUnitResults: true
              testResultsFiles: '**/TEST-*.xml'
-             goals: 'verify'
 
          - task: Maven@3
            displayName: Verify coverage
@@ -57,6 +67,17 @@ stages:
              mavenOptions: "-Xmx3072m"
              javaHomeOption: "JDKVersion"
              jdkVersionOption: "1.11"
+
+         - task: Maven@3
+           displayName: Package
+           inputs:
+             goals: "package"
+             mavenPomFile: "pom.xml"
+             options: "-Ppackage"
+             mavenOptions: "-Xmx3072m"
+             javaHomeOption: "JDKVersion"
+             jdkVersionOption: "1.11"
+             jdkArchitectureOption: "x64"
 
 
 
